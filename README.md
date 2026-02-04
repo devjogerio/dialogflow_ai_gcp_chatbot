@@ -47,16 +47,16 @@ O projeto segue uma arquitetura de microsserviços serverless e event-driven:
 
 ```mermaid
 graph TD
-    User[Usuário] -->|HTTPS| Frontend[Next.js App (Cloud Run)]
+    User[Usuário] -->|HTTPS| Frontend["Next.js App (Cloud Run)"]
     Frontend -->|API Call| Dialogflow[Dialogflow ES]
     Dialogflow -->|Webhook| CloudFunction[Python Cloud Function]
 
     subgraph "Google Cloud Platform"
-        CloudFunction -->|Query| VertexAI[Vertex AI Search (RAG)]
+        CloudFunction -->|Query| VertexAI["Vertex AI Search (RAG)"]
         CloudFunction -->|Context + Prompt| Gemini[Gemini 1.5 LLM]
-        CloudFunction -->|Create Ticket| DjangoAPI[Django Backend (Cloud Run)]
+        CloudFunction -->|Create Ticket| DjangoAPI["Django Backend (Cloud Run)"]
 
-        VertexAI -->|Index| GCS[Cloud Storage (PDFs)]
+        VertexAI -->|Index| GCS["Cloud Storage (PDFs)"]
         DjangoAPI -->|Persist| CloudSQL[PostgreSQL]
     end
 ```
