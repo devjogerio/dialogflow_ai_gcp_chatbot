@@ -292,5 +292,3 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 - **Docs:** [docs.nexus-ai.com](https://docs.nexus-ai.com)
 
 ---
-
-_Desenvolvido com 💙 e IA Generativa._
