@@ -1,0 +1,17 @@
+# Dependências do Python para Cloud Functions e Integrações Google Cloud
+
+# Framework leve para criar funções serverless (obrigatório para Cloud Functions)
+functions-framework==3.5.0
+
+# Cliente HTTP para fazer chamadas à API do Django
+requests==2.31.0
+
+# SDK do Google Cloud para Discovery Engine (Vertex AI Search)
+# Permite buscar documentos indexados no Data Store
+google-cloud-discoveryengine==0.11.0
+
+# SDK do Google Cloud para Vertex AI (Modelos Generativos como Gemini)
+google-cloud-aiplatform==1.43.0
+
+# Microframework web (usado internamente pelo functions-framework, mas bom declarar explicitamente)
+Flask==3.0.0
