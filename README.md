@@ -39,6 +39,16 @@ Além de responder dúvidas técnicas, o Nexus AI atua como um agente ativo capa
 - **Chat UI Responsiva:** Componente React/Next.js com feedback visual de digitação e histórico de mensagens.
 - **Integração Fluida:** Comunicação via API REST com o backend serverless.
 
+### 5. Automação e Importação do Agente
+O projeto conta com ferramentas de automação para criação e deploy do agente Dialogflow.
+
+- **Builder:** Script Python que gera o pacote ZIP do agente com todas as intents e configurações.
+- **Deploy:** Automação via Playwright para importação no console.
+
+Para usar a automação:
+1. Instale as dependências: `pip install playwright` e `playwright install`.
+2. Execute o script: `python automation/deploy_agent.py`.
+
 ---
 
 ## 🏗 Arquitetura da Solução
