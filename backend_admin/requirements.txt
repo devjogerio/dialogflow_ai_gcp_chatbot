@@ -1,0 +1,14 @@
+# Django Framework principal
+Django==5.0.0
+
+# Django REST Framework para criação da API que será consumida pelo Cloud Functions
+djangorestframework==3.14.0
+
+# Driver PostgreSQL para conexão com Cloud SQL
+psycopg2-binary==2.9.9
+
+# Gunicorn para servir a aplicação em produção no Cloud Run
+gunicorn==21.2.0
+
+# Biblioteca para integração com Django e CORS (necessário para Next.js)
+django-cors-headers==4.3.1

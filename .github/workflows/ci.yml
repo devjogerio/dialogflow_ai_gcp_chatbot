@@ -1,0 +1,56 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  backend-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+        
+    - name: Install Dependencies (Backend Admin)
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f backend_admin/requirements.txt ]; then pip install -r backend_admin/requirements.txt; fi
+        
+    - name: Django Check
+      run: |
+        cd backend_admin
+        # Cria um .env dummy para o teste passar se necessário, ou assume que o check não precisa de DB
+        echo "SECRET_KEY=dummy-secret-for-ci" > .env
+        echo "DEBUG=True" >> .env
+        python manage.py check
+
+  frontend-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install Dependencies (Frontend)
+      run: |
+        cd frontend_next
+        npm install
+        
+    - name: Lint
+      run: |
+        cd frontend_next
+        npm run lint
+        
+    - name: Build
+      run: |
+        cd frontend_next
+        npm run build
