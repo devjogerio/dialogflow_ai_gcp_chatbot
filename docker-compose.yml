@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: nexus_db
+    environment:
+      POSTGRES_DB: nexus_db
+      POSTGRES_USER: nexus_user
+      POSTGRES_PASSWORD: nexus_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - nexus_network
+
+  backend:
+    build: ./backend_admin
+    container_name: nexus_backend
+    command: gunicorn --bind 0.0.0.0:8000 --workers 1 --threads 8 --timeout 0 nexus_admin.wsgi:application
+    volumes:
+      - ./backend_admin:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=django-insecure-dev-key
+      - DB_ENGINE=postgres
+      - DB_NAME=nexus_db
+      - DB_USER=nexus_user
+      - DB_PASSWORD=nexus_password
+      - DB_HOST=db
+      - DB_PORT=5432
+    depends_on:
+      - db
+    networks:
+      - nexus_network
+
+  frontend:
+    build: ./frontend_next
+    container_name: nexus_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api
+    depends_on:
+      - backend
+    networks:
+      - nexus_network
+
+networks:
+  nexus_network:
+    driver: bridge
+
+volumes:
+  postgres_data:

@@ -49,6 +49,23 @@ Para usar a automação:
 1. Instale as dependências: `pip install playwright` e `playwright install`.
 2. Execute o script: `python automation/deploy_agent.py`.
 
+### 6. Executando Localmente (Docker)
+
+Para rodar todo o ambiente (Frontend + Backend + Banco de Dados) localmente:
+
+1. Copie o arquivo de exemplo de variáveis de ambiente:
+   ```bash
+   cp .env.example .env
+   ```
+2. Inicie os containers com Docker Compose:
+   ```bash
+   docker-compose up --build
+   ```
+3. Acesse os serviços:
+   - **Frontend:** http://localhost:3000
+   - **Backend API:** http://localhost:8000
+   - **Admin Django:** http://localhost:8000/admin
+
 ---
 
 ## 🏗 Arquitetura da Solução
