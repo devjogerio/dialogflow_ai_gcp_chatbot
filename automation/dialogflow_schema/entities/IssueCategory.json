@@ -1,0 +1,9 @@
+{
+  "id": "entity-category-id",
+  "name": "IssueCategory",
+  "isOverridable": true,
+  "isEnum": false,
+  "isRegexp": false,
+  "automatedExpansion": false,
+  "allowFuzzyExtraction": false
+}

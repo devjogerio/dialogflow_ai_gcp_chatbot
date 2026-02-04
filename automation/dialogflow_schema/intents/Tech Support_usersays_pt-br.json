@@ -1,0 +1,70 @@
+[
+  {
+    "data": [
+      {
+        "text": "Meu ",
+        "userDefined": false
+      },
+      {
+        "text": "servidor",
+        "alias": "product",
+        "meta": "@Product",
+        "userDefined": true
+      },
+      {
+        "text": " não está ligando",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "pt-br",
+    "updated": 0
+  },
+  {
+    "data": [
+      {
+        "text": "Tenho um erro de ",
+        "userDefined": false
+      },
+      {
+        "text": "software",
+        "alias": "issue_category",
+        "meta": "@IssueCategory",
+        "userDefined": true
+      },
+      {
+        "text": " no ",
+        "userDefined": false
+      },
+      {
+        "text": "ERP",
+        "alias": "product",
+        "meta": "@Product",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "pt-br",
+    "updated": 0
+  },
+  {
+    "data": [
+      {
+        "text": "Problema com ",
+        "userDefined": false
+      },
+      {
+        "text": "conexão",
+        "alias": "issue_category",
+        "meta": "@IssueCategory",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "pt-br",
+    "updated": 0
+  }
+]
