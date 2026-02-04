@@ -1,0 +1,28 @@
+[
+  {
+    "value": "Hardware",
+    "synonyms": [
+      "Hardware",
+      "Peça",
+      "Físico"
+    ]
+  },
+  {
+    "value": "Software",
+    "synonyms": [
+      "Software",
+      "Sistema",
+      "Programa",
+      "App"
+    ]
+  },
+  {
+    "value": "Rede",
+    "synonyms": [
+      "Rede",
+      "Internet",
+      "Conexão",
+      "Wifi"
+    ]
+  }
+]

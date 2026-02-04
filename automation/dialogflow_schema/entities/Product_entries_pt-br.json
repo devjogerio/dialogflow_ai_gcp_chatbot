@@ -1,0 +1,26 @@
+[
+  {
+    "value": "Servidor",
+    "synonyms": [
+      "Servidor",
+      "Server",
+      "Mainframe"
+    ]
+  },
+  {
+    "value": "Notebook",
+    "synonyms": [
+      "Notebook",
+      "Laptop",
+      "Computador"
+    ]
+  },
+  {
+    "value": "ERP",
+    "synonyms": [
+      "ERP",
+      "Sistema de Gestão",
+      "Software X"
+    ]
+  }
+]
