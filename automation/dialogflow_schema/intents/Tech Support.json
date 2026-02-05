@@ -1,0 +1,77 @@
+{
+  "id": "tech-support-intent-id",
+  "name": "Suporte Técnico - Reportar Problema",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "tech.support",
+      "affectedContexts": [
+        {
+          "name": "ticket-creation-context",
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "param-product",
+          "name": "product",
+          "required": true,
+          "dataType": "@Product",
+          "value": "$product",
+          "defaultValue": "",
+          "isList": false,
+          "prompts": [
+            {
+              "lang": "pt-br",
+              "value": "Qual produto está apresentando problema?"
+            }
+          ],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": []
+        },
+        {
+          "id": "param-issue",
+          "name": "issue_category",
+          "required": true,
+          "dataType": "@IssueCategory",
+          "value": "$issue_category",
+          "defaultValue": "",
+          "isList": false,
+          "prompts": [
+            {
+              "lang": "pt-br",
+              "value": "Isso é um problema de Hardware, Software ou Rede?"
+            }
+          ],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": []
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "pt-br",
+          "speech": [
+            "Entendi, você está com problema no $product do tipo $issue_category. Vou abrir um chamado para você. Por favor, descreva o problema com mais detalhes."
+          ]
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": [],
+  "conditionalResponses": [],
+  "condition": "",
+  "conditionalFollowupEvents": []
+}

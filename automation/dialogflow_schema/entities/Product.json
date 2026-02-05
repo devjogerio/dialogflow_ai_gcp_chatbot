@@ -1,0 +1,9 @@
+{
+  "id": "entity-product-id",
+  "name": "Product",
+  "isOverridable": true,
+  "isEnum": false,
+  "isRegexp": false,
+  "automatedExpansion": false,
+  "allowFuzzyExtraction": false
+}

@@ -49,6 +49,7 @@ media/
 node_modules/
 .next/
 out/
+/out/
 build/
 .pnp
 .pnp.js
