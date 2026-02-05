@@ -6,6 +6,9 @@ import sys
 
 def main():
     """Run administrative tasks."""
+    # Adiciona o diretório pai ao sys.path para permitir importação de módulos irmãos (ex: dialogflow_automation)
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
     # Define o módulo de configurações padrão para o projeto 'nexus_admin'
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'nexus_admin.settings')
     try:

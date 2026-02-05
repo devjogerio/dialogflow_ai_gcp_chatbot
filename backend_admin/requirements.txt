@@ -12,3 +12,7 @@ gunicorn==21.2.0
 
 # Biblioteca para integração com Django e CORS (necessário para Next.js)
 django-cors-headers==4.3.1
+
+# Dialogflow Automation dependencies
+google-cloud-dialogflow>=2.23.0
+python-dotenv==1.0.0
