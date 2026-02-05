@@ -62,3 +62,9 @@ coverage/
 
 # Docker
 .dockerignore
+
+# Documentation & Meta
+docs/
+CHANGELOG.md
+CONTRIBUTING.md
+VERSIONING_ROADMAP.md
