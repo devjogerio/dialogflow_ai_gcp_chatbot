@@ -146,3 +146,7 @@ else:
         "http://localhost:3000",
         "http://127.0.0.1:3000",
     ]
+
+# Dialogflow Webhook Security
+DIALOGFLOW_WEBHOOK_TOKEN = os.environ.get(
+    'DIALOGFLOW_WEBHOOK_TOKEN', 'nexus-secret-token')
