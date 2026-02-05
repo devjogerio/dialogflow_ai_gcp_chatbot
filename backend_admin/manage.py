@@ -3,6 +3,7 @@
 import os
 import sys
 
+
 def main():
     """Run administrative tasks."""
     # Define o módulo de configurações padrão para o projeto 'nexus_admin'
@@ -17,6 +18,7 @@ def main():
         ) from exc
     # Executa o comando passado via linha de comando (ex: runserver, migrate)
     execute_from_command_line(sys.argv)
+
 
 if __name__ == '__main__':
     main()
