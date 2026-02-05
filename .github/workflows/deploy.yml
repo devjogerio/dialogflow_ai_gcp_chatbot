@@ -1,0 +1,91 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: us-central1
+  BACKEND_SERVICE: nexus-admin-backend
+  FRONTEND_SERVICE: nexus-admin-frontend
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Backend Deps & Test
+        run: |
+          cd backend_admin
+          pip install -r requirements.txt
+          python manage.py test core
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Frontend Deps & Test
+        run: |
+          cd frontend_next
+          npm ci
+          npm test
+
+  deploy-backend:
+    needs: test-and-build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Google Auth
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Deploy Backend to Cloud Run
+        id: deploy-backend
+        uses: google-github-actions/deploy-cloudrun@v1
+        with:
+          service: ${{ env.BACKEND_SERVICE }}
+          source: ./backend_admin
+          region: ${{ env.REGION }}
+          flags: --allow-unauthenticated
+          env_vars: |
+            DJANGO_SETTINGS_MODULE=nexus_admin.settings
+            DEBUG=False
+            CORS_ALLOWED_ORIGINS=https://${{ env.FRONTEND_SERVICE }}-${{ env.PROJECT_ID }}.a.run.app,https://${{ env.FRONTEND_SERVICE }}.run.app
+
+  deploy-frontend:
+    needs: deploy-backend
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Google Auth
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      # Retrieve Backend URL (Assuming standardized Cloud Run URL or output from previous job if possible)
+      # For simplicity, we construct the URL pattern or use a fixed domain.
+      # Here we assume standard Cloud Run URL pattern: https://SERVICE-PROJECT_HASH-REGION.a.run.app
+      
+      - name: Deploy Frontend to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v1
+        with:
+          service: ${{ env.FRONTEND_SERVICE }}
+          source: ./frontend_next
+          region: ${{ env.REGION }}
+          flags: --allow-unauthenticated
+          env_vars: |
+            NEXT_PUBLIC_API_URL=https://${{ env.BACKEND_SERVICE }}-${{ env.PROJECT_ID }}.a.run.app

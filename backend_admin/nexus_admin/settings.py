@@ -118,8 +118,31 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # DRF Config
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
 }
 
-# CORS Config
-CORS_ALLOW_ALL_ORIGINS = True  # Para desenvolvimento apenas
+# CORS & CSRF Config
+CORS_ALLOW_CREDENTIALS = True
+
+# Em produção, defina CORS_ALLOWED_ORIGINS via variável de ambiente
+# Ex: CORS_ALLOWED_ORIGINS=https://meu-app.com,https://admin.meu-app.com
+if os.environ.get('CORS_ALLOWED_ORIGINS'):
+    CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS').split(',')
+    CSRF_TRUSTED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS').split(',')
+else:
+    # Desenvolvimento
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ]
+    CSRF_TRUSTED_ORIGINS = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ]
