@@ -3,8 +3,12 @@
 import os
 import sys
 
+
 def main():
     """Run administrative tasks."""
+    # Adiciona o diretório pai ao sys.path para permitir importação de módulos irmãos (ex: dialogflow_automation)
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
     # Define o módulo de configurações padrão para o projeto 'nexus_admin'
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'nexus_admin.settings')
     try:
@@ -17,6 +21,7 @@ def main():
         ) from exc
     # Executa o comando passado via linha de comando (ex: runserver, migrate)
     execute_from_command_line(sys.argv)
+
 
 if __name__ == '__main__':
     main()
