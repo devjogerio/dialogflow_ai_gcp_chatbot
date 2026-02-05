@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
+from django.contrib.auth.models import User
 from .models import Ticket, Budget
 import time
 
@@ -54,6 +55,9 @@ class TicketAPITest(APITestCase):
     """
 
     def setUp(self):
+        self.user = User.objects.create_user(
+            username='testuser', password='password')
+        self.client.force_authenticate(user=self.user)
         self.url = '/api/tickets/'
         self.ticket_data = {
             "customer_name": "Teste API",
@@ -120,8 +124,57 @@ class TicketAPITest(APITestCase):
 
     def test_method_not_allowed(self):
         """Teste de segurança: Método HTTP inválido."""
-        # Tentar DELETE na lista (não permitido por padrão no ModelViewSet sem pk, mas depende da config.
-        # Geralmente DELETE /api/tickets/ é 405 Method Not Allowed)
         response = self.client.delete(self.url)
         self.assertEqual(response.status_code,
                          status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def test_unauthenticated_access(self):
+        """Teste de acesso sem autenticação (deve falhar)."""
+        self.client.force_authenticate(user=None)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+class AuthAPITest(APITestCase):
+    """
+    Testes de Autenticação (Login, Logout, CSRF).
+    """
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='testuser', password='password')
+        self.login_url = '/api/auth/login/'
+        self.logout_url = '/api/auth/logout/'
+
+    def test_login_success(self):
+        response = self.client.post(
+            self.login_url, {'username': 'testuser', 'password': 'password'}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn('username', response.data)
+
+    def test_login_failure(self):
+        response = self.client.post(
+            self.login_url, {'username': 'testuser', 'password': 'wrong'}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_logout(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.post(self.logout_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+class CORSTest(TestCase):
+    """
+    Testes de CORS.
+    """
+
+    def test_cors_headers(self):
+        # Simula uma requisição OPTIONS de uma origem permitida (localhost:3000)
+        response = self.client.options(
+            '/api/tickets/', HTTP_ORIGIN='http://localhost:3000')
+        self.assertTrue(response.has_header('Access-Control-Allow-Origin'))
+        self.assertEqual(
+            response['Access-Control-Allow-Origin'], 'http://localhost:3000')
+        self.assertTrue(response.has_header(
+            'Access-Control-Allow-Credentials'))
+        self.assertEqual(response['Access-Control-Allow-Credentials'], 'true')
