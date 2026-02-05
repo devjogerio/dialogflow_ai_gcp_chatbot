@@ -32,6 +32,7 @@ Além de responder dúvidas técnicas, o Nexus AI atua como um agente ativo capa
 ### 3. Dashboard Administrativo
 
 - **Gestão de Tickets:** Interface Django Admin para visualização e acompanhamento de chamados.
+- **Painel de Operação:** Dashboard em React/Next.js para visualização em tempo real da fila de tickets com indicadores de status e prioridade.
 - **Controle de Acesso:** Sistema de autenticação e permissões para equipe de suporte.
 
 ### 4. Interface Moderna
@@ -195,6 +196,9 @@ npm install
 
 # Rodar servidor de desenvolvimento
 npm run dev
+
+# Rodar testes unitários
+npm test
 ```
 
 ---
