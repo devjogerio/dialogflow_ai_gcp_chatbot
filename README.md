@@ -32,6 +32,7 @@ Além de responder dúvidas técnicas, o Nexus AI atua como um agente ativo capa
 ### 3. Dashboard Administrativo
 
 - **Gestão de Tickets:** Interface Django Admin para visualização e acompanhamento de chamados.
+- **Painel de Operação:** Dashboard em React/Next.js para visualização em tempo real da fila de tickets com indicadores de status e prioridade.
 - **Controle de Acesso:** Sistema de autenticação e permissões para equipe de suporte.
 
 ### 4. Interface Moderna
@@ -47,16 +48,16 @@ O projeto segue uma arquitetura de microsserviços serverless e event-driven:
 
 ```mermaid
 graph TD
-    User[Usuário] -->|HTTPS| Frontend[Next.js App (Cloud Run)]
+    User[Usuário] -->|HTTPS| Frontend["Next.js App (Cloud Run)"]
     Frontend -->|API Call| Dialogflow[Dialogflow ES]
     Dialogflow -->|Webhook| CloudFunction[Python Cloud Function]
 
     subgraph "Google Cloud Platform"
-        CloudFunction -->|Query| VertexAI[Vertex AI Search (RAG)]
+        CloudFunction -->|Query| VertexAI["Vertex AI Search (RAG)"]
         CloudFunction -->|Context + Prompt| Gemini[Gemini 1.5 LLM]
-        CloudFunction -->|Create Ticket| DjangoAPI[Django Backend (Cloud Run)]
+        CloudFunction -->|Create Ticket| DjangoAPI["Django Backend (Cloud Run)"]
 
-        VertexAI -->|Index| GCS[Cloud Storage (PDFs)]
+        VertexAI -->|Index| GCS["Cloud Storage (PDFs)"]
         DjangoAPI -->|Persist| CloudSQL[PostgreSQL]
     end
 ```
@@ -195,6 +196,9 @@ npm install
 
 # Rodar servidor de desenvolvimento
 npm run dev
+
+# Rodar testes unitários
+npm test
 ```
 
 ---
@@ -292,5 +296,3 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 - **Docs:** [docs.nexus-ai.com](https://docs.nexus-ai.com)
 
 ---
-
-_Desenvolvido com 💙 e IA Generativa._

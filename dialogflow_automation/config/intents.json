@@ -1,0 +1,277 @@
+{
+  "entities": [
+    {
+      "display_name": "TicketType",
+      "kind": "KIND_MAP",
+      "entities": [
+        {
+          "value": "Incidente",
+          "synonyms": [
+            "Incidente",
+            "Quebrou",
+            "Parou de funcionar",
+            "Erro",
+            "Falha",
+            "Problema"
+          ]
+        },
+        {
+          "value": "Requisição",
+          "synonyms": [
+            "Requisição",
+            "Solicitação",
+            "Novo pedido",
+            "Instalar",
+            "Preciso de",
+            "Gostaria de"
+          ]
+        }
+      ]
+    },
+    {
+      "display_name": "TicketPriority",
+      "kind": "KIND_MAP",
+      "entities": [
+        {
+          "value": "Crítica",
+          "synonyms": [
+            "Crítica",
+            "Urgente",
+            "Parou a empresa",
+            "Emergência",
+            "Imediato"
+          ]
+        },
+        {
+          "value": "Alta",
+          "synonyms": ["Alta", "Importante", "Prioritário"]
+        },
+        {
+          "value": "Média",
+          "synonyms": ["Média", "Normal", "Padrão"]
+        },
+        {
+          "value": "Baixa",
+          "synonyms": ["Baixa", "Pode esperar", "Quando der"]
+        }
+      ]
+    },
+    {
+      "display_name": "TicketCategory",
+      "kind": "KIND_MAP",
+      "entities": [
+        {
+          "value": "Hardware",
+          "synonyms": [
+            "Hardware",
+            "Equipamento",
+            "Máquina",
+            "Computador",
+            "Mouse",
+            "Teclado",
+            "Impressora",
+            "Notebook"
+          ]
+        },
+        {
+          "value": "Software",
+          "synonyms": [
+            "Software",
+            "Programa",
+            "Sistema",
+            "App",
+            "Aplicativo",
+            "Office",
+            "Windows",
+            "Excel"
+          ]
+        },
+        {
+          "value": "Rede",
+          "synonyms": [
+            "Rede",
+            "Internet",
+            "Wi-Fi",
+            "Conexão",
+            "VPN",
+            "Lentidão"
+          ]
+        },
+        {
+          "value": "Acesso",
+          "synonyms": ["Acesso", "Login", "Senha", "Conta", "Desbloqueio"]
+        }
+      ]
+    },
+    {
+      "display_name": "Department",
+      "kind": "KIND_MAP",
+      "entities": [
+        {
+          "value": "TI",
+          "synonyms": ["TI", "Tecnologia", "Suporte", "Informática"]
+        },
+        {
+          "value": "RH",
+          "synonyms": ["RH", "Recursos Humanos", "Pessoal"]
+        },
+        {
+          "value": "Financeiro",
+          "synonyms": ["Financeiro", "Contas", "Fiscal"]
+        },
+        {
+          "value": "Vendas",
+          "synonyms": ["Vendas", "Comercial"]
+        }
+      ]
+    }
+  ],
+  "intents": [
+    {
+      "display_name": "abrir_chamado",
+      "training_phrases": [
+        "Quero abrir um chamado",
+        "Preciso de suporte técnico",
+        "Meu computador parou de funcionar",
+        "A impressora do RH não funciona",
+        "Solicitar novo mouse",
+        "Erro ao acessar o sistema de vendas",
+        "Internet caiu no financeiro",
+        "Registrar um incidente",
+        "Preciso instalar o Office"
+      ],
+      "messages": [
+        "Entendi. Vou abrir um chamado para você. Preciso de algumas informações. Qual é o seu nome?"
+      ],
+      "parameters": [
+        {
+          "display_name": "person_name",
+          "entity_type_display_name": "@sys.person",
+          "mandatory": true,
+          "prompts": ["Qual é o seu nome completo?"]
+        },
+        {
+          "display_name": "contact_info",
+          "entity_type_display_name": "@sys.any",
+          "mandatory": true,
+          "prompts": ["Qual seu e-mail ou telefone para contato?"]
+        },
+        {
+          "display_name": "department",
+          "entity_type_display_name": "@Department",
+          "mandatory": true,
+          "prompts": ["Qual é o seu departamento ou empresa?"]
+        },
+        {
+          "display_name": "ticket_title",
+          "entity_type_display_name": "@sys.any",
+          "mandatory": true,
+          "prompts": [
+            "Por favor, dê um título curto para o problema (ex: Impressora não liga)."
+          ]
+        },
+        {
+          "display_name": "ticket_type",
+          "entity_type_display_name": "@TicketType",
+          "mandatory": true,
+          "prompts": [
+            "Isso é um Incidente (algo quebrou) ou uma Requisição (algo novo)?"
+          ]
+        },
+        {
+          "display_name": "category",
+          "entity_type_display_name": "@TicketCategory",
+          "mandatory": true,
+          "prompts": ["Qual a categoria? (Hardware, Software, Rede, Acesso)"]
+        },
+        {
+          "display_name": "priority",
+          "entity_type_display_name": "@TicketPriority",
+          "mandatory": true,
+          "prompts": [
+            "Qual a prioridade/urgência? (Baixa, Média, Alta, Crítica)"
+          ]
+        },
+        {
+          "display_name": "description",
+          "entity_type_display_name": "@sys.any",
+          "mandatory": true,
+          "prompts": [
+            "Descreva detalhadamente o problema e passos para reproduzir."
+          ]
+        },
+        {
+          "display_name": "location",
+          "entity_type_display_name": "@sys.any",
+          "mandatory": false,
+          "prompts": [
+            "Você está presencial ou remoto? Se presencial, qual a localização?"
+          ]
+        }
+      ]
+    },
+    {
+      "display_name": "consultar_status_chamado",
+      "training_phrases": [
+        "Qual o status do meu chamado?",
+        "Verificar chamado 12345",
+        "Acompanhar solicitação",
+        "Meu chamado já foi atendido?",
+        "Status do ticket 54321"
+      ],
+      "messages": ["Vou verificar o status para você."],
+      "parameters": [
+        {
+          "display_name": "ticket_id",
+          "entity_type_display_name": "@sys.number",
+          "mandatory": true,
+          "prompts": ["Qual é o número do chamado (ID)?"]
+        }
+      ]
+    },
+    {
+      "display_name": "fechar_chamado_feedback",
+      "training_phrases": [
+        "Meu problema foi resolvido",
+        "Pode fechar o chamado",
+        "Ticket resolvido com sucesso",
+        "Avaliar atendimento"
+      ],
+      "messages": [
+        "Que bom que foi resolvido! Como você avalia o atendimento de 1 a 5?"
+      ],
+      "parameters": [
+        {
+          "display_name": "ticket_id",
+          "entity_type_display_name": "@sys.number",
+          "mandatory": true,
+          "prompts": ["Qual o número do chamado que deseja fechar/avaliar?"]
+        },
+        {
+          "display_name": "rating",
+          "entity_type_display_name": "@sys.number",
+          "mandatory": true,
+          "prompts": ["De 1 a 5, qual sua nota para o atendimento?"]
+        },
+        {
+          "display_name": "feedback_text",
+          "entity_type_display_name": "@sys.any",
+          "mandatory": false,
+          "prompts": ["Gostaria de deixar algum comentário adicional?"]
+        }
+      ]
+    },
+    {
+      "display_name": "duvida_tecnica",
+      "training_phrases": [
+        "Como reinicio o servidor?",
+        "A luz vermelha está piscando",
+        "Erro no sistema",
+        "Não consigo acessar o banco de dados"
+      ],
+      "messages": [
+        "Essa parece ser uma dúvida técnica. Posso abrir um chamado para o suporte N2 verificar."
+      ]
+    }
+  ]
+}

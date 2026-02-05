@@ -1,24 +1,44 @@
-## Descrição
-Resumo das alterações incluídas neste Pull Request.
+## Tipo de Mudança
 
-## Tipo de mudança
-- [ ] Bug fix (alteração que corrige um problema)
-- [ ] Nova feature (alteração que adiciona funcionalidade)
-- [ ] Breaking change (correção ou feature que faria com que a funcionalidade existente não funcionasse como esperado)
-- [ ] Atualização de documentação
+- [ ] Bugfix
+- [ ] Feature
+- [ ] Refatoração
+- [ ] Documentação
+- [ ] Performance
+- [ ] Segurança
 
-## Como isso foi testado?
-Descreva os testes que você executou para verificar suas alterações.
+## Descrição Detalhada
 
-- [ ] Teste Unitário
-- [ ] Teste Manual
-- [ ] Teste de Integração
+<!-- Descreva as alterações realizadas com detalhes técnicos -->
 
-## Checklist:
-- [ ] Meu código segue as diretrizes de estilo deste projeto
-- [ ] Realizei uma auto-revisão do meu próprio código
-- [ ] Comentei meu código, principalmente em áreas difíceis de entender
-- [ ] Fiz as alterações correspondentes na documentação
-- [ ] Minhas alterações não geram novos avisos (warnings)
-- [ ] Adicionei testes que provam que minha correção é eficaz ou que minha feature funciona
-- [ ] Testes de unidade novos e existentes passam localmente com minhas alterações
+## Issue Relacionada
+
+<!-- Link para a issue no GitHub (ex: Fixes #123) -->
+
+## Testes Realizados
+
+- [ ] Testes unitários passando
+- [ ] Testes de integração passando
+- [ ] Testes manuais realizados
+- [ ] Testes de carga executados (se aplicável)
+
+## Checklist de Qualidade
+
+- [ ] Código segue os padrões do projeto
+- [ ] Documentação atualizada
+- [ ] Sem warnings ou erros de lint
+- [ ] Testes de regressão adicionados
+- [ ] Performance verificada
+- [ ] Segurança validada
+
+## Screenshots/Vídeos (se aplicável)
+
+<!-- Adicione evidências visuais das mudanças -->
+
+## Breaking Changes
+
+<!-- Liste quaisquer mudanças que quebram compatibilidade -->
+
+## Informações Adicionais
+
+<!-- Qualquer informação relevante para revisores -->

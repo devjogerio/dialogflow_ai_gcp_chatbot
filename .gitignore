@@ -47,8 +47,8 @@ media/
 
 # Node.js / Next.js
 node_modules/
-/.next/
-/out/
+.next/
+out/
 build/
 .pnp
 .pnp.js
@@ -62,3 +62,9 @@ coverage/
 
 # Docker
 .dockerignore
+
+# Documentation & Meta
+docs/
+CHANGELOG.md
+CONTRIBUTING.md
+VERSIONING_ROADMAP.md
